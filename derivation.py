@@ -30,7 +30,7 @@ class TuringPatternDerivation(Scene):
         self.play(Write(linear_eq))
         self.play(Write(jacobian))
         self.wait(3)
-        self.play(*[FadeOut(obj) for obj in [subtitle1, perturbation, linear_eq, jacobian]])
+        self.play(*[FadeOut(obj) for obj in [subtitle1, perturbation, linear_eq]])
 
         # --- Slide 3: Pure Kinetic Stability ---
         subtitle2 = Text("2. Stability in Absence of Diffusion (k=0)", font_size=30).to_edge(UP).shift(DOWN * 0.8)
@@ -42,7 +42,7 @@ class TuringPatternDerivation(Scene):
         self.play(Write(subtitle2))
         self.play(Write(cond_k0))
         self.wait(2)
-        self.play(FadeOut(subtitle2), FadeOut(cond_k0))
+        self.play(FadeOut(subtitle2), FadeOut(cond_k0), FadeOut(jacobian))
 
         # --- Slide 4: The Dispersion Relation ---
         subtitle3 = Text("3. Diffusive Instability (k > 0)", font_size=30).to_edge(UP).shift(DOWN * 0.8)
