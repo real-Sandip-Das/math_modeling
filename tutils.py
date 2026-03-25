@@ -47,6 +47,23 @@ class BaseStateSystem:
         anim.save(filename=filename, dpi=60, fps=10, writer='imagemagick')
         plt.close()
         
+    def display_time_evolution(self, n_steps=30):
+        """
+        Displays the time evolution inline as an interactive HTML5 video 
+        within the Jupyter notebook, bypassing slow GIF file saves.
+        """
+        from IPython.display import HTML, display
+        self.initialise()
+        fig, ax = self.initialise_figure()
+
+        def step(t):
+            self.update()
+            self.draw(ax)
+
+        anim = animation.FuncAnimation(fig, step, frames=np.arange(n_steps), interval=20)
+        display(HTML(anim.to_jshtml()))
+        plt.close()
+        
     def plot_evolution_outcome(self, filename, n_steps):
         """
         Evolves and save the outcome of evolving the system for n_steps
